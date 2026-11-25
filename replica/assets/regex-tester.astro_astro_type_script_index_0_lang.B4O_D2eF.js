@@ -1,0 +1,20 @@
+import{c as $}from"./client.71ECtlVJ.js";import{c as w}from"./toolboxSearch.BkeV6xp8.js";const l=$("tool-i18n"),x=document.getElementById("regexInput"),y=document.getElementById("testInput"),p=document.getElementById("results"),i=document.getElementById("matchBadge"),u=document.getElementById("highlightSection"),b=document.getElementById("highlightPane"),S=document.querySelectorAll("[data-flag]"),m=new Set(["g"]),o=t=>t.replace(/[&<>"']/g,e=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"})[e]);S.forEach(t=>{t.addEventListener("click",()=>{const e=t.getAttribute("data-flag");e&&(m.has(e)?m.delete(e):m.add(e),t.classList.toggle("on",m.has(e)),t.setAttribute("aria-pressed",String(m.has(e))),E())})});function k(t,e){if(t.global)return Array.from(e.matchAll(t));const c=t.exec(e);return c?[c]:[]}function T(t,e){if(!u||!b)return;if(t.length===0){u.hidden=!0;return}u.hidden=!1;let c=0;const n=[];for(const s of t){const r=s.index??0,h=r+s[0].length;r<c||(n.push(o(e.slice(c,r))),n.push(`<mark class="tw-mark">${o(s[0]||"")}</mark>`),c=h)}n.push(o(e.slice(c))),b.innerHTML=n.join("")}function E(){if(!x||!y||!p)return;const t=x.value.trim(),e=y.value;if(!t||!e.trim()){i&&(i.hidden=!0),u&&(u.hidden=!0),p.innerHTML=`
+        <div class="rounded-xl bg-[#eef0ff] text-[#181c7a] px-4 py-3.5 text-sm" role="status">
+          ${o(l("emptyResults"))}
+        </div>`;return}try{const c=new RegExp(t,Array.from(m).join("")),n=k(c,e);if(i&&(i.hidden=!1,i.textContent=l(n.length===1?"matchCountOne":"matchCountOther",{count:n.length})),T(n,e),n.length===0){p.innerHTML=`
+          <div class="rounded-xl bg-[#fef9c3] text-[#713f12] px-4 py-3.5 text-sm" role="status">
+            ${o(l("noMatches"))}
+          </div>`;return}p.innerHTML=`
+        <table class="rt-results-table w-full text-[13.5px] border-collapse">
+          <tbody>
+            ${n.map((s,r)=>`
+                <tr class="rt-results-row border-t border-[#e7e5e4] first:border-t-0">
+                  <td class="rt-cell-label py-2.5 pr-3 text-[#78716c] w-[120px] whitespace-nowrap">${o(l("matchRow",{n:r+1}))}</td>
+                  <td class="rt-cell-match py-2.5 pr-3 font-mono text-[13px] break-all">${o(s[0]||"")}</td>
+                  <td class="rt-cell-meta py-2.5 font-mono text-[13px] text-[#78716c] whitespace-nowrap">${o(l("indexLabel",{idx:s.index??"–"}))}${s.length>1?` · ${s.slice(1).map((h,v)=>o(l("groupLabel",{n:v+1,value:h??"—"}))).join(" · ")}`:""}</td>
+                </tr>`).join("")}
+          </tbody>
+        </table>`}catch(c){i&&(i.hidden=!0),u&&(u.hidden=!0),p.innerHTML=`
+        <div class="rounded-xl bg-[#fee2e2] text-[#7f1d1d] px-4 py-3.5 text-sm" role="alert">
+          ${o(l("invalidRegex",{message:c.message}))}
+        </div>`}}x?.addEventListener("input",E);y?.addEventListener("input",E);function M(t,e){const c=document.getElementById(t),n=document.getElementById(`${e}SearchToggleBtn`),s=document.getElementById(`${e}SearchRow`),r=document.getElementById(`${e}SearchInput`),h=document.getElementById(`${e}SearchCount`),v=document.getElementById(`${e}SearchPrevBtn`),L=document.getElementById(`${e}SearchNextBtn`),B=document.getElementById(`${e}SearchCloseBtn`),a=w(c);function g(){if(!h)return;const d=a.count();h.textContent=d===0?l("searchNoMatches"):l("searchMatchCount",{current:a.currentIndex()+1,total:d})}function I(){s&&(s.hidden=!0),n?.classList.remove("active"),n?.setAttribute("aria-pressed","false")}n?.addEventListener("click",()=>{const d=s?.hidden??!0;I(),d&&(s&&(s.hidden=!1),n.classList.add("active"),n.setAttribute("aria-pressed","true"),r?.focus(),a.run(r?.value??""),g())}),B?.addEventListener("click",I);let f;r?.addEventListener("input",()=>{clearTimeout(f),f=setTimeout(()=>{a.run(r.value),g()},250)}),r?.addEventListener("keydown",d=>{d.key==="Enter"&&(f!==void 0?(clearTimeout(f),f=void 0,a.run(r.value)):d.shiftKey?a.prev():a.next(),g()),d.key==="Escape"&&B?.click()}),v?.addEventListener("click",()=>{a.prev(),g()}),L?.addEventListener("click",()=>{a.next(),g()})}M("testInput","testInput");

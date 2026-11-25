@@ -1,0 +1,1 @@
+const e=document.getElementById("libDialog");document.getElementById("ackTrigger")?.addEventListener("click",()=>e?.showModal());document.getElementById("ackClose")?.addEventListener("click",()=>e?.close());e?.addEventListener("click",t=>{t.target===e&&e.close()});

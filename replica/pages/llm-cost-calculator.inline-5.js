@@ -1,0 +1,1 @@
+function t(){document.querySelectorAll(".cta-try-openreplay, .cta-check-repo").forEach(e=>{e.addEventListener("click",()=>{const n=e.classList.contains("cta-try-openreplay")?"Try OpenReplay":"Check Repo";window.tracker?.event("cta_click",{tool:e.dataset.toolPage||"unknown",cta_name:n})})})}document.readyState==="loading"?document.addEventListener("DOMContentLoaded",t):t();

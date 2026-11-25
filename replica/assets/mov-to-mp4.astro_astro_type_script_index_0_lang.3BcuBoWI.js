@@ -1,0 +1,1 @@
+import{i as e,o as t}from"./videoToolClient.D4WvuGxN.js";import{c as i}from"./client.71ECtlVJ.js";import"./imageFiles.B3-tmJRP.js";import"./browser.CjhBleZy.js";const c=i("tool-i18n"),m=document.getElementById("reencode");e({accept:".mov,video/quicktime",kinds:["mov"],t:c,buildOptions:()=>({out:"mp4",forceTranscode:m.checked,audio:"aac"}),outputName:o=>t(o,"mp4")});

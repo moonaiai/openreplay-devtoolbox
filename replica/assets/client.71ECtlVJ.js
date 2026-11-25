@@ -1,0 +1,1 @@
+function l(e,t){return t?e.replace(/\{(\w+)\}/g,(i,n)=>n in t?String(t[n]):`{${n}}`):e}function d(e="i18n-data"){let t={};if(typeof document<"u"){const i=document.getElementById(e);if(i?.textContent)try{t=JSON.parse(i.textContent)}catch{t={}}}return function(n,u){const r=n.split(".").reduce((o,c)=>o?.[c],t);return l(r==null?n:String(r),u)}}export{d as c};

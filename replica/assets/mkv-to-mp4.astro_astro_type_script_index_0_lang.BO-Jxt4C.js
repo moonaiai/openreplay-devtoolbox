@@ -1,0 +1,1 @@
+import{i as e,o as t}from"./videoToolClient.D4WvuGxN.js";import{c as i}from"./client.71ECtlVJ.js";import"./imageFiles.B3-tmJRP.js";import"./browser.CjhBleZy.js";const m=i("tool-i18n"),c=document.getElementById("reencode");e({accept:".mkv,video/x-matroska",kinds:["mkv"],t:m,buildOptions:()=>({out:"mp4",forceTranscode:c?.checked??!1,audio:"aac"}),outputName:o=>t(o,"mp4")});

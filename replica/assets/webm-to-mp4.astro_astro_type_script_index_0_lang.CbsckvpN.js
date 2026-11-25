@@ -1,0 +1,1 @@
+import{i,o as t}from"./videoToolClient.D4WvuGxN.js";import{c as m}from"./client.71ECtlVJ.js";import"./imageFiles.B3-tmJRP.js";import"./browser.CjhBleZy.js";const e=m("tool-i18n");i({accept:".webm,video/webm",kinds:["webm"],t:e,buildOptions:()=>({out:"mp4",audio:"aac"}),outputName:o=>t(o,"mp4")});

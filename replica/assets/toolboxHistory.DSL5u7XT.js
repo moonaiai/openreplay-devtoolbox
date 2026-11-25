@@ -1,0 +1,1 @@
+function c(o="",u=600,l){let t=[o],e=0,n;function i(r){r!==t[e]&&(t=t.slice(0,e+1),t.push(r),e=t.length-1,l?.())}return{onType(r){n!==void 0&&clearTimeout(n),n=setTimeout(()=>i(r),u)},flushTyping(){n!==void 0&&clearTimeout(n)},commit:i,canUndo:()=>e>0,canRedo:()=>e<t.length-1,undo(){return e<=0?null:(e--,t[e])},redo(){return e>=t.length-1?null:(e++,t[e])}}}export{c};

@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>OpenDevToolbox · 开发者工具箱</title>
+  <link rel="stylesheet" href="app.css" />
+</head>
+<body>
+  <div id="app">
+    <header class="topbar">
+      <button id="menuBtn" class="icon-btn" title="切换侧栏" aria-label="切换侧栏">
+        <svg viewBox="0 0 24 24" width="18" height="18"><path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/></svg>
+      </button>
+      <div class="brand" id="brandHome" title="返回工具箱首页">
+        <span class="brand-mark">OD</span>
+        <span class="brand-text">OpenDev<span>Toolbox</span></span>
+      </div>
+      <div class="search-wrap">
+        <svg class="search-icon" viewBox="0 0 24 24" width="16" height="16"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" fill="none"/><path d="m20 20-3.5-3.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        <input id="searchInput" type="search" autocomplete="off" spellcheck="false" placeholder="搜索工具，例如 JSON / 颜色 / JWT / cron…" />
+        <kbd>/</kbd>
+      </div>
+      <button id="themeBtn" class="icon-btn" title="切换主题" aria-label="切换主题">
+        <svg viewBox="0 0 24 24" width="18" height="18"><path d="M12 3v2m0 14v2M3 12h2m14 0h2M5.6 5.6l1.4 1.4m10 10 1.4 1.4m0-12.8-1.4 1.4m-10 10-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.8" fill="none"/></svg>
+      </button>
+      <button id="sidePanelBtn" class="icon-btn ext-only" title="在新标签页打开" aria-label="在新标签页打开">
+        <svg viewBox="0 0 24 24" width="18" height="18"><path d="M14 4h6v6M20 4l-9 9" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M19 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h5" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
+      </button>
+    </header>
+
+    <div class="shell">
+      <aside id="sidebar">
+        <div class="side-group">
+          <div class="side-title">工作台</div>
+          <button class="side-link active" data-view="home">
+            <svg viewBox="0 0 24 24" width="17" height="17"><rect x="3" y="3" width="7" height="7" rx="2" stroke="currentColor" stroke-width="1.8" fill="none"/><rect x="14" y="3" width="7" height="7" rx="2" stroke="currentColor" stroke-width="1.8" fill="none"/><rect x="3" y="14" width="7" height="7" rx="2" stroke="currentColor" stroke-width="1.8" fill="none"/><rect x="14" y="14" width="7" height="7" rx="2" stroke="currentColor" stroke-width="1.8" fill="none"/></svg>
+            全部工具 <span id="allCount" class="pill">0</span>
+          </button>
+          <button class="side-link" data-view="record">
+            <svg viewBox="0 0 24 24" width="17" height="17"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8" fill="none"/><circle cx="12" cy="12" r="4" fill="currentColor"/></svg>
+            会话录制 / 回放
+          </button>
+          <button class="side-link" data-view="about">
+            <svg viewBox="0 0 24 24" width="17" height="17"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8" fill="none"/><path d="M12 11v6m0-10v.01" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            关于与说明
+          </button>
+        </div>
+        <div class="side-group grow">
+          <div class="side-title">工具分类</div>
+          <nav id="categoryNav"></nav>
+        </div>
+        <div class="side-foot">
+          <span class="dot"></span> 100% 本地运行 · 不上传数据
+        </div>
+      </aside>
+
+      <main id="main">
+        <section id="homeView" class="view">
+          <div class="hero">
+            <div>
+              <div class="eyebrow">LOCAL-FIRST DEVELOPER TOOLBOX</div>
+              <h1>开发者工具箱</h1>
+              <p>OpenReplay 官方工具页的本地离线复刻，仅保留工具本体。所有计算都在浏览器本地完成。</p>
+            </div>
+            <div class="hero-art" aria-hidden="true">
+              <div class="orbit o1"></div><div class="orbit o2"></div><div class="core">{ }</div>
+            </div>
+          </div>
+          <div class="section-head"><h2 id="gridTitle">全部工具</h2><span id="gridCount"></span></div>
+          <div id="toolGrid" class="tool-grid"></div>
+          <div id="emptyState" class="empty" hidden>没有匹配的工具，试试别的关键词。</div>
+        </section>
+
+        <section id="toolView" class="view" hidden>
+          <button id="backBtn" class="back-btn">← 返回工具箱</button>
+          <div class="replica-bar" id="replicaBar" hidden>
+            <span class="replica-badge">原站复刻</span>
+            <span class="replica-hint">原站工具控件，仅保留工具本体</span>
+            <span class="spacer"></span>
+            <button type="button" id="openTabBtn" class="replica-link-btn">新标签页打开</button>
+            <a id="sourceLink" class="replica-source" href="https://openreplay.com/zh/tools/" target="_blank" rel="noopener">官网 ↗</a>
+          </div>
+          <iframe id="replicaFrame" class="replica-frame" title="OpenReplay 工具控件" hidden></iframe>
+        </section>
+
+        <section id="recordView" class="view" hidden>
+          <div class="page-head">
+            <h1>会话录制 / 回放</h1>
+            <p>轻量版 OpenReplay：记录当前标签页的 DOM 快照、控制台、网络请求、错误和交互，并保存在本机。</p>
+          </div>
+          <div id="recordBody"></div>
+        </section>
+
+        <section id="aboutView" class="view" hidden>
+          <div class="page-head"><h1>关于与说明</h1><p>实现来源、覆盖范围与隐私说明。</p></div>
+          <div id="aboutBody" class="prose"></div>
+        </section>
+      </main>
+    </div>
+
+    <div id="toast" class="toast" hidden></div>
+  </div>
+
+  <script src="js/utils.js"></script>
+  <script src="js/catalog.js"></script>
+  <script src="js/recorder-ui.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,1 @@
+import{i as o,o as t}from"./videoToolClient.D4WvuGxN.js";import{c as m}from"./client.71ECtlVJ.js";import"./imageFiles.B3-tmJRP.js";import"./browser.CjhBleZy.js";const p=m("tool-i18n");o({accept:".gif,image/gif",kinds:["gif"],t:p,buildOptions:()=>({out:"mp4"}),outputName:i=>t(i,"mp4")});
