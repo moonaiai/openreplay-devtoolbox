@@ -81,4 +81,4 @@ python3 scripts/build_replica.py
 
 - Chrome 扩展 MV3 的 CSP 禁止 `eval` / `new Function`。少数依赖它的工具（`jsonpath-tester`、`heic-to-jpg`、`jpg-to-png`、`png-to-jpg`、`webp-to-png`、`svg-to-png`、`image-compressor`）在扩展页内可能无法正常执行核心逻辑；点「新标签页打开」后作为普通网页打开不受此限制。
 - 会话录制只保存在本机，不上传。
-- IP 地址查询需要联网：留空查询当前出口 IP 或输入指定 IP 时，会向 `ipwho.is` 发送该 IP 以获取归属信息。
+- IP 地址查询需要联网：会向 `ipwho.is` 发送所查询的 IP；若该服务限流，则改用 `api.ipify.org` 获取当前 IP，并向 `api.iplocation.net` 查询归属信息（此回退来源仅提供部分字段）。
