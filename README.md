@@ -1,8 +1,8 @@
 # OpenDevToolbox — 开发者工具箱 Chrome 插件
 
-一个本地优先的 Chrome Manifest V3 扩展。点击工具栏图标即可在弹窗中打开工具箱，内置 105 个开发者工具，并附带轻量级的会话录制 / 回放。
+一个本地优先的 Chrome Manifest V3 扩展。点击工具栏图标即可在弹窗中打开工具箱，内置 106 个开发者工具，并附带轻量级的会话录制 / 回放。
 
-所有工具页面都已本地化，离线可用，不上传任何数据。
+绝大多数工具页面都已本地化，离线可用，不上传任何数据；IP 地址查询会向公共查询服务发送所查询的 IP。
 
 ## 安装
 
@@ -50,7 +50,7 @@ js/utils.js                # 通用工具函数
 js/recorder-ui.js          # 会话录制 / 回放界面
 background.js / content.js # 后台状态与页面录制脚本
 scripts/build_replica.py   # 生成工具控件本地副本（本地化资源、裁剪页面）
-replica/pages/*.html       # 105 个工具控件页面
+replica/pages/*.html       # 106 个工具控件页面
 replica/pages/*.inline-*.js# 工具页面内联脚本
 replica/assets/            # JS / CSS 资源
 replica/root/              # 图片、图标等静态资源
@@ -63,7 +63,7 @@ icons/                     # 扩展图标
 python3 scripts/build_replica.py
 ```
 
-## 工具覆盖（105 个）
+## 工具覆盖（106 个）
 
 | 分类 | 数量 | 示例 |
 | --- | ---: | --- |
@@ -72,7 +72,7 @@ python3 scripts/build_replica.py
 | 格式化 / 校验 | 12 | JSON/XML/SQL/HTML/CSS/JS 格式化与压缩、JSONL 校验 |
 | 数据转换 | 13 | JSON⇄CSV/YAML/XML/TOML、JSON→TS/Go/Schema、curl、Markdown |
 | 文本 / 进制 | 22 | diff、字数、正则、时间戳、cron、进制互转、ASCII、chmod |
-| Web 开发 | 13 | HAR 查看器、UA/URL/Cookie 解析、meta 标签、ICE/泄露测试、gitignore |
+| Web 开发 | 14 | HAR 查看器、UA/URL/Cookie 解析、IP 地址查询、meta 标签、ICE/泄露测试、gitignore |
 | 安全 / 加密 | 13 | JWT 编解码、MD5/SHA、HMAC、AES、UUID/密码、子网、QR Code |
 | 图片 / 视频 | 15 | 图片转换 / 压缩、favicon、SVG→PNG、视频截取与帧导出 |
 | AI / LLM | 3 | Token 估算、成本计算、上下文窗口检查 |
@@ -81,3 +81,4 @@ python3 scripts/build_replica.py
 
 - Chrome 扩展 MV3 的 CSP 禁止 `eval` / `new Function`。少数依赖它的工具（`jsonpath-tester`、`heic-to-jpg`、`jpg-to-png`、`png-to-jpg`、`webp-to-png`、`svg-to-png`、`image-compressor`）在扩展页内可能无法正常执行核心逻辑；点「新标签页打开」后作为普通网页打开不受此限制。
 - 会话录制只保存在本机，不上传。
+- IP 地址查询需要联网：留空查询当前出口 IP 或输入指定 IP 时，会向 `ipwho.is` 发送该 IP 以获取归属信息。

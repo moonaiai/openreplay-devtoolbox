@@ -100,6 +100,7 @@
     ['webrtc-ice-test', 'WebRTC ICE 测试', 'web', '测试 STUN 服务器并收集 ICE 候选', 'webrtc ice stun'],
     ['webrtc-leak-test', 'WebRTC 泄露测试', 'web', '检测 WebRTC 是否泄露你的真实 IP', 'webrtc leak privacy'],
     ['file-drop', '一次性文件分享', 'web', '生成带过期时间的本地文件分享链接（实验版）', 'file share one time'],
+    ['ip-lookup', 'IP 地址查询', 'web', '查询 IP 的归属地区、坐标、时区和网络信息', 'ip lookup geo whois asn isp'],
 
     // 安全 / 加密
     ['jwt-decoder', 'JWT 解码器', 'security', '解码并检查 JSON Web Token', 'jwt decode token'],

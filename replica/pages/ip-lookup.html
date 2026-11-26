@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>IP 地址查询</title>
+<link rel="stylesheet" href="../assets/openreplay-vs-fullstory.Dkc5ONXj.css"><link rel="stylesheet" href="../assets/aes-encryption.krKBw4nL.css">
+<style>
+  body { margin: 0; padding: 28px 20px; background: #fafaf9; color: #1c1917;
+         font-family: Figtree, "Noto Sans SC", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+  main { max-width: 1000px; margin: 0 auto; }
+</style>
+</head>
+<body>
+<main><section class="bg-white border border-[#e7e5e4] rounded-2xl shadow-[0_12px_30px_rgba(17,17,17,0.08)] p-5 sm:p-7">
+  <div class="flex flex-wrap items-end gap-3.5">
+    <label class="flex flex-col gap-1.5 w-[320px]">
+      <span class="text-[12.5px] font-semibold text-[#78716c]">IP 地址</span>
+      <input id="ipInput" type="text" placeholder="留空查询当前 IP，例如 8.8.8.8" class="input input-bordered font-mono w-full px-3" aria-label="IP 地址">
+    </label>
+    <button id="queryBtn" class="btn btn-primary">查询</button>
+    <span id="status" class="text-[12.5px] text-[#78716c]">留空将查询当前出口 IP</span>
+  </div>
+  <table class="w-full mt-6 text-[13.5px] border-collapse" id="resultsTable">
+    <tbody>
+      <tr class="border-t border-[#e7e5e4] first:border-t-0"><td class="py-2.5 pr-3 text-[#78716c] w-[200px]">IP 地址</td><td class="py-2.5 pr-3 font-mono text-[13px]" id="out-ip" dir="auto">—</td><td class="py-1.5 text-right w-[70px]"><button class="btn btn-ghost btn-sm text-[#78716c] copy-row" data-target="out-ip" aria-label="复制 IP 地址"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 9h11v11H9z"></path><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></td></tr>
+      <tr class="border-t border-[#e7e5e4]"><td class="py-2.5 pr-3 text-[#78716c] w-[200px]">国家 / 地区</td><td class="py-2.5 pr-3 font-mono text-[13px]" id="out-country" dir="auto">—</td><td class="py-1.5 text-right w-[70px]"><button class="btn btn-ghost btn-sm text-[#78716c] copy-row" data-target="out-country" aria-label="复制国家"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 9h11v11H9z"></path><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></td></tr>
+      <tr class="border-t border-[#e7e5e4]"><td class="py-2.5 pr-3 text-[#78716c] w-[200px]">省 / 州</td><td class="py-2.5 pr-3 font-mono text-[13px]" id="out-region" dir="auto">—</td><td class="py-1.5 text-right w-[70px]"><button class="btn btn-ghost btn-sm text-[#78716c] copy-row" data-target="out-region" aria-label="复制省州"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 9h11v11H9z"></path><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></td></tr>
+      <tr class="border-t border-[#e7e5e4]"><td class="py-2.5 pr-3 text-[#78716c] w-[200px]">城市</td><td class="py-2.5 pr-3 font-mono text-[13px]" id="out-city" dir="auto">—</td><td class="py-1.5 text-right w-[70px]"><button class="btn btn-ghost btn-sm text-[#78716c] copy-row" data-target="out-city" aria-label="复制城市"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 9h11v11H9z"></path><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></td></tr>
+      <tr class="border-t border-[#e7e5e4]"><td class="py-2.5 pr-3 text-[#78716c] w-[200px]">经纬度</td><td class="py-2.5 pr-3 font-mono text-[13px]" id="out-coords" dir="auto">—</td><td class="py-1.5 text-right w-[70px]"><button class="btn btn-ghost btn-sm text-[#78716c] copy-row" data-target="out-coords" aria-label="复制经纬度"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 9h11v11H9z"></path><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></td></tr>
+      <tr class="border-t border-[#e7e5e4]"><td class="py-2.5 pr-3 text-[#78716c] w-[200px]">时区</td><td class="py-2.5 pr-3 font-mono text-[13px]" id="out-timezone" dir="auto">—</td><td class="py-1.5 text-right w-[70px]"><button class="btn btn-ghost btn-sm text-[#78716c] copy-row" data-target="out-timezone" aria-label="复制时区"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 9h11v11H9z"></path><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></td></tr>
+      <tr class="border-t border-[#e7e5e4]"><td class="py-2.5 pr-3 text-[#78716c] w-[200px]">ISP / 组织</td><td class="py-2.5 pr-3 font-mono text-[13px]" id="out-isp" dir="auto">—</td><td class="py-1.5 text-right w-[70px]"><button class="btn btn-ghost btn-sm text-[#78716c] copy-row" data-target="out-isp" aria-label="复制 ISP"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 9h11v11H9z"></path><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></td></tr>
+      <tr class="border-t border-[#e7e5e4]"><td class="py-2.5 pr-3 text-[#78716c] w-[200px]">ASN</td><td class="py-2.5 pr-3 font-mono text-[13px]" id="out-asn" dir="auto">—</td><td class="py-1.5 text-right w-[70px]"><button class="btn btn-ghost btn-sm text-[#78716c] copy-row" data-target="out-asn" aria-label="复制 ASN"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 9h11v11H9z"></path><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></td></tr>
+      <tr class="border-t border-[#e7e5e4]"><td class="py-2.5 pr-3 text-[#78716c] w-[200px]">查询来源</td><td class="py-2.5 pr-3 font-mono text-[13px]" id="out-source" dir="auto">ipwho.is</td><td class="py-1.5 text-right w-[70px]"></td></tr>
+    </tbody>
+  </table>
+</section></main>
+<script src="../assets/ip-lookup.js"></script>
+</body>
+</html>
